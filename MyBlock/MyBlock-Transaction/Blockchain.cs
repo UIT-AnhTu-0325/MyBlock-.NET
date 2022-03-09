@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBlock_Proof_of_work
+namespace MyBlock_Transaction
 {
     public class Blockchain
     {
+        private readonly int Reward = 10;
         public IList<Block> Chain { set; get; }
         public int Difficulty { set; get; } =3;
+        IList<Transaction> PendingTransactions = new List<Transaction>();
 
         public Blockchain()
         {
@@ -25,7 +27,9 @@ namespace MyBlock_Proof_of_work
 
         public Block CreateGenesisBlock()
         {
-            return new Block(DateTime.Now, null, "{}");
+            var genBlock =  new Block(DateTime.Now, null, new List<Transaction>());
+            genBlock.Mine(Difficulty);
+            return genBlock;
         }
 
         public void AddGenesisBlock()
@@ -65,6 +69,20 @@ namespace MyBlock_Proof_of_work
                 }
             }
             return true;
+        }
+
+        public void CreateTransaction(Transaction transaction)
+        {
+            PendingTransactions.Add(transaction);
+        }
+
+        public void ProcessPendingTransactions(string minerAddress)
+        {
+            Block block = new Block(DateTime.Now, GetLatestBlock().Hash, PendingTransactions);
+            AddBlock(block);
+
+            PendingTransactions = new List<Transaction>();
+            CreateTransaction(new Transaction(null, minerAddress, Reward));
         }
     }
 }
