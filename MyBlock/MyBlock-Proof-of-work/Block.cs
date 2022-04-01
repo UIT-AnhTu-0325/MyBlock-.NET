@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MyBlock_Proof_of_work
 {
@@ -43,7 +39,7 @@ namespace MyBlock_Proof_of_work
                 this.Nonce++;
                 this.Hash = this.CalculateHash();
             }
-            Console.WriteLine(Hash);
+            //Console.WriteLine(Hash);
         }
     }
 }

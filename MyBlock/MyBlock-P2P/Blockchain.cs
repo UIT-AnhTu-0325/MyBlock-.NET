@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyBlock_P2P
+﻿namespace MyBlock_P2P
 {
     public class Blockchain
     {

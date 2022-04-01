@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace MyBlock_P2P
 {
@@ -59,6 +58,9 @@ namespace MyBlock_P2P
                     case 3:
                         Console.WriteLine("Blockchain");
                         Console.WriteLine(JsonConvert.SerializeObject(PhillyCoin, Formatting.Indented));
+                        break;
+                    default:
+                        Console.WriteLine("Wrong action");
                         break;
 
                 }
