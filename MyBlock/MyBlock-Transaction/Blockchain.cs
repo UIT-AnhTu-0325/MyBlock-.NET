@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyBlock_Transaction
+﻿namespace MyBlock_Transaction
 {
     public class Blockchain
     {
         private readonly int Reward = 10;
         public IList<Block> Chain { set; get; }
-        public int Difficulty { set; get; } =3;
+        public int Difficulty { set; get; } = 3;
         IList<Transaction> PendingTransactions = new List<Transaction>();
 
         public Blockchain()
@@ -27,7 +21,7 @@ namespace MyBlock_Transaction
 
         public Block CreateGenesisBlock()
         {
-            var genBlock =  new Block(DateTime.Now, null, new List<Transaction>());
+            var genBlock = new Block(DateTime.Now, null, new List<Transaction>());
             genBlock.Mine(Difficulty);
             return genBlock;
         }

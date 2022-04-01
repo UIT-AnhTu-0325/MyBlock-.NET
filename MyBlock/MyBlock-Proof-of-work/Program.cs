@@ -1,4 +1,5 @@
 ﻿using MyBlock_Proof_of_work;
+using Newtonsoft.Json;
 
 var startTime = DateTime.Now;
 
@@ -10,3 +11,5 @@ phillyCoin.AddBlock(new Block(DateTime.Now, null, "{sender:Mahesh,receiver:Henry
 var endTime = DateTime.Now;
 
 Console.WriteLine($"Duration: {endTime - startTime}");
+
+Console.WriteLine(JsonConvert.SerializeObject(phillyCoin, Formatting.Indented));

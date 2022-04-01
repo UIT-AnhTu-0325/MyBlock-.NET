@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using WebSocketSharp;
 
 namespace MyBlock_P2P
@@ -24,7 +21,8 @@ namespace MyBlock_P2P
                     else
                     {
                         Blockchain newChain = JsonConvert.DeserializeObject<Blockchain>(e.Data);
-                        if (newChain.IsValid() && newChain.Chain.Count > Program.PhillyCoin.Chain.Count)
+                        if (newChain.IsValid() 
+                        && (newChain.Chain.Count > Program.PhillyCoin.Chain.Count))
                         {
                             List<Transaction> newTransactions = new List<Transaction>();
                             newTransactions.AddRange(newChain.PendingTransactions);
@@ -41,23 +39,19 @@ namespace MyBlock_P2P
                 wsDict.Add(url, ws);
             }
         }
-
-        public void Send(string url, string data)
-        {
-            foreach (var item in wsDict)
-            {
-                if (item.Key == url)
-                {
-                    item.Value.Send(data);
-                }
-            }
-        }
-
         public void Broadcast(string data)
         {
             foreach (var item in wsDict)
             {
                 item.Value.Send(data);
+            }
+        }
+
+        public void Close()
+        {
+            foreach (var item in wsDict)
+            {
+                item.Value.Close();
             }
         }
 
@@ -71,12 +65,16 @@ namespace MyBlock_P2P
             return servers;
         }
 
-        public void Close()
+        public void Send(string url, string data)
         {
             foreach (var item in wsDict)
             {
-                item.Value.Close();
+                if (item.Key == url)
+                {
+                    item.Value.Send(data);
+                }
             }
         }
+
     }
 }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyBlock_Proof_of_work
+﻿namespace MyBlock_Proof_of_work
 {
     public class Blockchain
     {
         public IList<Block> Chain { set; get; }
-        public int Difficulty { set; get; } =3;
+        public int Difficulty { set; get; } = 3;
 
         public Blockchain()
         {
